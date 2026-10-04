@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viking Poll Service — Election Tracking Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; background: #f4f6f9; margin:0; padding: 24px; color: #333; }
+        .container { max-width: 820px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 32px; background: #1b2a4a; color: white; padding: 24px; border-radius: 8px; }
+        .header h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; }
+        .header p { color: #cbd5e1; font-size: 14px; margin-top: 6px; margin-bottom: 0; }
+        .footer { text-align: center; font-size: 12px; color: #888; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Viking Poll Service</h1>
+            <p>Official Election Tracking Center | Non-Partisan Polling Model</p>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — AZ-06
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>JoAnna Mendoza Leads (+12.6%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>JoAnna Mendoza (D)</span><span>52.3%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:52.3%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Juan Ciscomani (R)</span><span>39.7%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:39.7%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — CA-45
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>Derek Tran Leads (+19.8%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Derek Tran (D)</span><span>55.9%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:55.9%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Chuong Vo (R)</span><span>36.1%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:36.1%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — CO-08
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>Gabe Evans Leads (+3.8%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Gabe Evans (R)</span><span>47.9%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:47.9%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Manny Rutinel (D)</span><span>44.1%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:44.1%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — FL-27
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>Eliott Rodriguez Leads (+25.4%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Eliott Rodriguez (D)</span><span>58.7%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:58.7%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Maria Elvira Salazar (R)</span><span>33.3%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:33.3%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — IA-01
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #d9534f; font-weight: bold;'>Statistical Dead Heat (Within MoE)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Christina Bohannan (D)</span><span>46.2%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:46.2%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Mariannette Miller-Meeks (R)</span><span>45.8%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:45.8%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — MI-07
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>Tom Barrett Leads (+19.6%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Tom Barrett (R)</span><span>55.8%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:55.8%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>William Lawrence (D)</span><span>36.2%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:36.2%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — NB-02
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>Don Bacon Leads (+3.4%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Don Bacon (R)</span><span>47.7%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:47.7%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Tony Vargas (D)</span><span>44.3%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:44.3%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — NC-01
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>Donald Davis Leads (+12.2%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Donald Davis (D)</span><span>52.1%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:52.1%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Laurie Buckhout (R)</span><span>39.9%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:39.9%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — NJ-07
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #a93226; font-weight: bold;'>Thomas Kean Jr. Leads (+4.6%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Rebecca Bennett (D)</span><span>43.7%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:43.7%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Thomas Kean Jr. (R)</span><span>48.3%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:48.3%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — NM-02
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #a93226; font-weight: bold;'>Gabriel Vasquez Leads (+6.0%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Greg Cunningham (R)</span><span>43.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:43.0%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Gabriel Vasquez (D)</span><span>49.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:49.0%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — NY-04
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #a93226; font-weight: bold;'>Laura Gillen Leads (+20.0%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Anthony D'Esposito (R)</span><span>36.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:36.0%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Laura Gillen (D)</span><span>56.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:56.0%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — OH-09
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #a93226; font-weight: bold;'>Marcy Kaptur Leads (+11.6%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Derrick Merrin (R)</span><span>40.2%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:40.2%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Marcy Kaptur (D)</span><span>51.8%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:51.8%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — PA-07
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>Ryan Mackenzie Leads (+16.6%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Ryan Mackenzie (R)</span><span>54.3%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:54.3%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Bob Brooks (D)</span><span>37.7%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:37.7%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — VA-02
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #1a5276; font-weight: bold;'>Jen Kiggans Leads (+6.0%)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Jen Kiggans (R)</span><span>49.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:49.0%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Elaine Luria (D)</span><span>43.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:43.0%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — WA-03
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> <span style='color: #d9534f; font-weight: bold;'>Statistical Dead Heat (Within MoE)</span> &nbsp;|&nbsp; <strong>MoE:</strong> ±2.4%
+            </p>
+            
+            <!-- Candidate A -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>Marie G. Perez (D)</span><span>45.9%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#1a5276; width:45.9%; height:100%;"></div>
+                </div>
+            </div>
+            
+            <!-- Candidate B -->
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>John Braun (R)</span><span>46.1%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#a93226; width:46.1%; height:100%;"></div>
+                </div>
+            </div>
+
+            <!-- Undecided -->
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
+                    <span>Undecided / Other</span><span>8.0%</span>
+                </div>
+                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:8.0%; height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Methodology: Random sample of n=400 likely voters per district. Margin of Error ±2.4% at 95% confidence level.</p>
+        </div>
+    </div>
+</body>
+</html>
