@@ -6,9 +6,10 @@ import pandas as pd
 # ==============================================================================
 # 1. GOOGLE SHEETS CONFIGURATION
 # ==============================================================================
-# Paste your Published CSV link from Google Sheets inside the quotes below:
-SHEET_CSV_URL = (
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSaPToc3xnwH3RgkfTc5zzXb5cEMyrdeTJoSERr73IkWcioxlZc3nTSMPYk0qoOMMN8K6S1RYgplKJr/pub?gid=0&single=true&output=csv"
+# Read from environment variable to keep credentials out of version control
+SHEET_CSV_URL = os.getenv(
+    "SHEET_CSV_URL",
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSaPToc3xnwH3RgkfTc5zzXb5cEMyrdeTJoSERr73IkWcioxlZc3nTSMPYk0qoOMMN8K6S1RYgplKJr/pub?gid=0&single=true&output=csv",
 )
 
 
@@ -32,13 +33,8 @@ def load_sheet_data(url):
 # ==============================================================================
 # 2. VIKING POLL MATH ENGINE
 # ==============================================================================
-def calculate_viking_poll(score_a, score_b, base_undecided=0.08, moe=2.4):
-    """Transforms raw sim point totals into Viking Poll Service polling numbers:
-
-    - Fixed 4.0% Undecided voter buffer.
-    - Hyperbolic Tangent (tanh) dampening curve to hide exact point ratios.
-    - Statistical Margin of Error (±2.4%).
-    """
+def calculate_viking_poll(score_a, score_b, base_undecided=0.04, moe=2.4):
+    """Transforms raw sim point totals into Viking Poll Service polling numbers."""
     total_pts = score_a + score_b
     if total_pts == 0:
         raw_diff = 0
@@ -47,11 +43,11 @@ def calculate_viking_poll(score_a, score_b, base_undecided=0.08, moe=2.4):
 
     # Tanh curve compresses large gaps into realistic polling spreads
     dampened_lead = np.tanh(raw_diff * 1.5) * 0.14
-    decided_pool = 1.0 - base_undecided  # 0.92
+    decided_pool = 1.0 - base_undecided  # 0.96
 
     poll_a = round(((decided_pool / 2) + dampened_lead) * 100, 1)
     poll_b = round(((decided_pool / 2) - dampened_lead) * 100, 1)
-    undecided = round(100.0 - (poll_a + poll_b), 1)
+    undecided = max(0.0, round(100.0 - (poll_a + poll_b), 1))
 
     return poll_a, poll_b, undecided, moe
 
@@ -73,15 +69,18 @@ def generate_viking_poll_dashboard(df, output_img="viking_poll_dashboard.png"):
         ax = axes[idx]
         rows = group.to_dict(orient="records")
 
+        if not rows:
+            continue
+
         cand_a = f"{rows[0]['candidate']} ({rows[0]['party']})"
         score_a = rows[0]["total sim points"]
 
-        cand_b = (
-            f"{rows[1]['candidate']} ({rows[1]['party']})"
-            if len(rows) > 1
-            else "Opponent"
-        )
-        score_b = rows[1]["total sim points"] if len(rows) > 1 else 0
+        if len(rows) > 1:
+            cand_b = f"{rows[1]['candidate']} ({rows[1]['party']})"
+            score_b = rows[1]["total sim points"]
+        else:
+            cand_b = "Opponent (IND)"
+            score_b = 0
 
         p_a, p_b, und, moe = calculate_viking_poll(score_a, score_b)
 
@@ -95,11 +94,13 @@ def generate_viking_poll_dashboard(df, output_img="viking_poll_dashboard.png"):
             y_pos,
             percents,
             xerr=xerr,
-            capsize=4,
             color=colors,
             height=0.48,
             alpha=0.9,
             edgecolor="black",
+            error_kw=dict(
+                ecolor="black", lw=1.5, capsize=5, capthick=1.5
+            ),
         )
 
         ax.set_yticks(y_pos)
@@ -144,6 +145,8 @@ def generate_html_website(df, output_html="index.html"):
 
     for district_name, group in grouped:
         rows = group.to_dict(orient="records")
+        if not rows:
+            continue
 
         cand_a_name = rows[0]["candidate"]
         cand_a_party = rows[0]["party"]
