@@ -35,7 +35,7 @@ def load_sheet_data(url):
 def calculate_viking_poll(score_a, score_b, base_undecided=0.08, moe=2.4):
     """Transforms raw sim point totals into Viking Poll Service polling numbers:
 
-    - Fixed 8.0% Undecided voter buffer.
+    - Fixed 4.0% Undecided voter buffer.
     - Hyperbolic Tangent (tanh) dampening curve to hide exact point ratios.
     - Statistical Margin of Error (±2.4%).
     """
