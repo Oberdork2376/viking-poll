@@ -6,7 +6,6 @@ import pandas as pd
 # ==============================================================================
 # 1. GOOGLE SHEETS CONFIGURATION
 # ==============================================================================
-# Read from environment variable to keep credentials out of version control
 SHEET_CSV_URL = os.getenv(
     "SHEET_CSV_URL",
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vSaPToc3xnwH3RgkfTc5zzXb5cEMyrdeTJoSERr73IkWcioxlZc3nTSMPYk0qoOMMN8K6S1RYgplKJr/pub?gid=0&single=true&output=csv",
@@ -41,9 +40,8 @@ def calculate_viking_poll(score_a, score_b, base_undecided=0.04, moe=2.4):
     else:
         raw_diff = (score_a - score_b) / total_pts
 
-    # Tanh curve compresses large gaps into realistic polling spreads
     dampened_lead = np.tanh(raw_diff * 1.5) * 0.14
-    decided_pool = 1.0 - base_undecided  # 0.96
+    decided_pool = 1.0 - base_undecided
 
     poll_a = round(((decided_pool / 2) + dampened_lead) * 100, 1)
     poll_b = round(((decided_pool / 2) - dampened_lead) * 100, 1)
@@ -64,6 +62,13 @@ def generate_viking_poll_dashboard(df, output_img="viking_poll_dashboard.png"):
     )
     if num_districts == 1:
         axes = [axes]
+
+    color_map = {
+        "GOP": "#a93226",
+        "REP": "#a93226",
+        "DEM": "#1a5276",
+        "IND": "#7f8c8d"
+    }
 
     for idx, (district_name, group) in enumerate(grouped):
         ax = axes[idx]
@@ -86,14 +91,6 @@ def generate_viking_poll_dashboard(df, output_img="viking_poll_dashboard.png"):
 
         categories = [cand_a, cand_b, "Undecided / Other"]
         percents = [p_a, p_b, und]
-
-        # Party-based color mapping for Dashboard
-        color_map = {
-            "GOP": "#a93226",  # Red for Republicans
-            "REP": "#a93226",
-            "DEM": "#1a5276",  # Blue for Democrats
-            "IND": "#7f8c8d"   # Gray for Independents / Others
-        }
 
         party_a = str(rows[0].get("party", "")).upper() if len(rows) > 0 else ""
         party_b = str(rows[1].get("party", "")).upper() if len(rows) > 1 else ""
@@ -158,6 +155,13 @@ def generate_html_website(df, output_html="index.html"):
     cards_html = ""
     grouped = df.groupby("district")
 
+    color_map = {
+        "GOP": "#a93226",
+        "REP": "#a93226",
+        "DEM": "#1a5276",
+        "IND": "#7f8c8d"
+    }
+
     for district_name, group in grouped:
         rows = group.to_dict(orient="records")
         if not rows:
@@ -184,21 +188,6 @@ def generate_html_website(df, output_html="index.html"):
         else:
             status = f"<span style='color: #a93226; font-weight: bold;'>{cand_b_name} Leads (+{margin:.1f}%)</span>"
 
-        cards_html += f"""
-        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
-            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
-                Viking Poll Service — {district_name}
-            </h2>
-            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
-                <strong>Race Assessment:</strong> {status} &nbsp;|&nbsp; <strong>MoE:</strong> ±{moe}%
-            </p>
-            
-            color_map = {
-            "GOP": "#a93226",
-            "REP": "#a93226",
-            "DEM": "#1a5276",
-            "IND": "#7f8c8d"
-        }
         hex_a = color_map.get(str(cand_a_party).upper(), "#1a5276")
         hex_b = color_map.get(str(cand_b_party).upper(), "#a93226")
 
@@ -211,74 +200,66 @@ def generate_html_website(df, output_html="index.html"):
                 <strong>Race Assessment:</strong> {status} &nbsp;|&nbsp; <strong>MoE:</strong> ±{moe}%
             </p>
             
-            <!-- Candidate A -->
             <div style="margin-bottom: 14px;">
                 <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
-                    <span>{cand_a_name} ({cand_a_party})</span><span>{p_a}%</span>
+                    <span>{cand_a_name} ({cand_a_party})</span>
+                    <span>{p_a:.1f}%</span>
                 </div>
-                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
-                    <div style="background:{hex_a}; width:{p_a}%; height:100%;"></div>
-                </div>
-            </div>
-            
-            <!-- Candidate B -->
-            <div style="margin-bottom: 14px;">
-                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
-                    <span>{cand_b_name} ({cand_b_party})</span><span>{p_b}%</span>
-                </div>
-                <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
-                    <div style="background:{hex_b}; width:{p_b}%; height:100%;"></div>
+                <div style="background:#e0e0e0; border-radius:4px; height:18px; width:100%; margin-top:4px;">
+                    <div style="background:{hex_a}; width:{p_a}%; height:100%; border-radius:4px;"></div>
                 </div>
             </div>
 
-            <!-- Undecided -->
-            <div>
-                <div style="display:flex; justify-content:space-between; font-size:13px; color:#666;">
-                    <span>Undecided / Other</span><span>{und}%</span>
+            <div style="margin-bottom: 14px;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
+                    <span>{cand_b_name} ({cand_b_party})</span>
+                    <span>{p_b:.1f}%</span>
                 </div>
-                <div style="background:#e9ecef; border-radius:4px; height:18px; width:100%; overflow:hidden; margin-top:4px;">
-                    <div style="background:#7f8c8d; width:{und}%; height:100%;"></div>
+                <div style="background:#e0e0e0; border-radius:4px; height:18px; width:100%; margin-top:4px;">
+                    <div style="background:{hex_b}; width:{p_b}%; height:100%; border-radius:4px;"></div>
+                </div>
+            </div>
+
+            <div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; color: #7f8c8d;">
+                    <span>Undecided / Other</span>
+                    <span>{und:.1f}%</span>
+                </div>
+                <div style="background:#e0e0e0; border-radius:4px; height:12px; width:100%; margin-top:4px;">
+                    <div style="background:#7f8c8d; width:{und}%; height:100%; border-radius:4px;"></div>
                 </div>
             </div>
         </div>
         """
 
     full_html = f"""<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Viking Poll Service — Election Tracking Center</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Viking Poll Service Dashboard</title>
     <style>
-        body {{ font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; background: #f4f6f9; margin:0; padding: 24px; color: #333; }}
-        .container {{ max-width: 820px; margin: 0 auto; }}
-        .header {{ text-align: center; margin-bottom: 32px; background: #1b2a4a; color: white; padding: 24px; border-radius: 8px; }}
-        .header h1 {{ margin: 0; font-size: 26px; letter-spacing: 0.5px; }}
-        .header p {{ color: #cbd5e1; font-size: 14px; margin-top: 6px; margin-bottom: 0; }}
-        .footer {{ text-align: center; font-size: 12px; color: #888; margin-top: 40px; }}
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 40px 20px; }}
+        .container {{ max-width: 800px; margin: 0 auto; }}
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🛡️ Viking Poll Service</h1>
-            <p>Official Election Tracking Center | Non-Partisan Polling Model</p>
-        </div>
+        <h1 style="text-align: center; color: #1b2a4a; margin-bottom: 30px;">Viking Poll Service — Statewide Polling</h1>
         {cards_html}
-        <div class="footer">
-            <p>Methodology: Random sample of n=400 likely voters per district. Margin of Error ±2.4% at 95% confidence level.</p>
-        </div>
     </div>
 </body>
 </html>
 """
+
     with open(output_html, "w", encoding="utf-8") as f:
         f.write(full_html)
-    print(f"[+] Live HTML Website file generated: {output_html}")
+    print(f"[+] HTML Dashboard created: {output_html}")
 
 
-# Execution block
+# ==============================================================================
+# 5. EXECUTION ENTRY POINT
+# ==============================================================================
 if __name__ == "__main__":
-    df_data = load_sheet_data(SHEET_CSV_URL)
-    generate_viking_poll_dashboard(df_data)
-    generate_html_website(df_data)
+    df = load_sheet_data(SHEET_CSV_URL)
+    generate_viking_poll_dashboard(df)
+    generate_html_website(df)
