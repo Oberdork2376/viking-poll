@@ -64,10 +64,16 @@ def generate_viking_poll_dashboard(df, output_img="viking_poll_dashboard.png"):
         axes = [axes]
 
     color_map = {
-        "GOP": "#a93226",
-        "REP": "#a93226",
+        "D": "#1a5276",        # Blue for Democrats
         "DEM": "#1a5276",
-        "IND": "#7f8c8d"
+        "DEMOCRAT": "#1a5276",
+        "R": "#a93226",        # Red for Republicans
+        "REP": "#a93226",
+        "GOP": "#a93226",
+        "REPUBLICAN": "#a93226",
+        "IND": "#7f8c8d",      # Gray for Independents
+        "I": "#7f8c8d",
+        "INDEPENDENT": "#7f8c8d"
     }
 
     for idx, (district_name, group) in enumerate(grouped):
@@ -92,11 +98,11 @@ def generate_viking_poll_dashboard(df, output_img="viking_poll_dashboard.png"):
         categories = [cand_a, cand_b, "Undecided / Other"]
         percents = [p_a, p_b, und]
 
-        party_a = str(rows[0].get("party", "")).upper() if len(rows) > 0 else ""
-        party_b = str(rows[1].get("party", "")).upper() if len(rows) > 1 else ""
+        party_a = str(rows[0].get("party", "")).strip().upper() if len(rows) > 0 else ""
+        party_b = str(rows[1].get("party", "")).strip().upper() if len(rows) > 1 else ""
 
-        color_a = color_map.get(party_a, "#1a5276")
-        color_b = color_map.get(party_b, "#a93226")
+        color_a = color_map.get(party_a, "#7f8c8d")
+        color_b = color_map.get(party_b, "#7f8c8d")
 
         colors = [color_a, color_b, "#7f8c8d"]
         xerr = [moe, moe, 0.0]
@@ -156,10 +162,16 @@ def generate_html_website(df, output_html="index.html"):
     grouped = df.groupby("district")
 
     color_map = {
-        "GOP": "#a93226",
-        "REP": "#a93226",
+        "D": "#1a5276",        # Blue for Democrats
         "DEM": "#1a5276",
-        "IND": "#7f8c8d"
+        "DEMOCRAT": "#1a5276",
+        "R": "#a93226",        # Red for Republicans
+        "REP": "#a93226",
+        "GOP": "#a93226",
+        "REPUBLICAN": "#a93226",
+        "IND": "#7f8c8d",      # Gray for Independents
+        "I": "#7f8c8d",
+        "INDEPENDENT": "#7f8c8d"
     }
 
     for district_name, group in grouped:
@@ -188,8 +200,8 @@ def generate_html_website(df, output_html="index.html"):
         else:
             status = f"<span style='color: #a93226; font-weight: bold;'>{cand_b_name} Leads (+{margin:.1f}%)</span>"
 
-        hex_a = color_map.get(str(cand_a_party).upper(), "#1a5276")
-        hex_b = color_map.get(str(cand_b_party).upper(), "#a93226")
+        hex_a = color_map.get(str(cand_a_party).strip().upper(), "#7f8c8d")
+        hex_b = color_map.get(str(cand_b_party).strip().upper(), "#7f8c8d")
 
         cards_html += f"""
         <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
@@ -233,18 +245,22 @@ def generate_html_website(df, output_html="index.html"):
         """
 
     full_html = f"""<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viking Poll Service Dashboard</title>
     <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 40px 20px; }}
-        .container {{ max-width: 800px; margin: 0 auto; }}
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; color: #333; }}
+        .container {{ max-width: 900px; margin: 0 auto; }}
+        h1 {{ text-align: center; color: #1b2a4a; margin-bottom: 30px; }}
+        .chart-img {{ width: 100%; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 30px; }}
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center; color: #1b2a4a; margin-bottom: 30px;">Viking Poll Service — Statewide Polling</h1>
+        <h1>Viking Poll Service Dashboard</h1>
+        <img src="viking_poll_dashboard.png" alt="Viking Poll Dashboard Graphic" class="chart-img">
         {cards_html}
     </div>
 </body>
