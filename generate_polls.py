@@ -190,13 +190,31 @@ def generate_html_website(df, output_html="index.html"):
                 <strong>Race Assessment:</strong> {status} &nbsp;|&nbsp; <strong>MoE:</strong> ±{moe}%
             </p>
             
+            color_map = {
+            "GOP": "#a93226",
+            "REP": "#a93226",
+            "DEM": "#1a5276",
+            "IND": "#7f8c8d"
+        }
+        hex_a = color_map.get(str(cand_a_party).upper(), "#1a5276")
+        hex_b = color_map.get(str(cand_b_party).upper(), "#a93226")
+
+        cards_html += f"""
+        <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
+            <h2 style="margin-top:0; color: #1b2a4a; border-bottom: 2px solid #3498db; padding-bottom: 8px; font-size: 20px;">
+                Viking Poll Service — {district_name}
+            </h2>
+            <p style="font-size: 14px; color: #444; margin-bottom: 16px;">
+                <strong>Race Assessment:</strong> {status} &nbsp;|&nbsp; <strong>MoE:</strong> ±{moe}%
+            </p>
+            
             <!-- Candidate A -->
             <div style="margin-bottom: 14px;">
                 <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:14px; color: #2c3e50;">
                     <span>{cand_a_name} ({cand_a_party})</span><span>{p_a}%</span>
                 </div>
                 <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
-                    <div style="background:#1a5276; width:{p_a}%; height:100%;"></div>
+                    <div style="background:{hex_a}; width:{p_a}%; height:100%;"></div>
                 </div>
             </div>
             
@@ -206,7 +224,7 @@ def generate_html_website(df, output_html="index.html"):
                     <span>{cand_b_name} ({cand_b_party})</span><span>{p_b}%</span>
                 </div>
                 <div style="background:#e9ecef; border-radius:4px; height:24px; width:100%; overflow:hidden; margin-top:4px;">
-                    <div style="background:#a93226; width:{p_b}%; height:100%;"></div>
+                    <div style="background:{hex_b}; width:{p_b}%; height:100%;"></div>
                 </div>
             </div>
 
