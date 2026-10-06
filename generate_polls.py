@@ -84,9 +84,21 @@ def generate_viking_poll_dashboard(df, output_img="viking_poll_dashboard.png"):
 
         p_a, p_b, und, moe = calculate_viking_poll(score_a, score_b)
 
-        categories = [cand_a, cand_b, "Undecided / Other"]
+       categories = [cand_a, cand_b, "Undecided / Other"]
         percents = [p_a, p_b, und]
-        colors = ["#1a5276", "#a93226", "#7f8c8d"]
+
+        # Party-based color mapping for Dashboard
+        color_map = {
+            "GOP": "#a93226",  # Red for Republicans
+            "REP": "#a93226",
+            "DEM": "#1a5276",  # Blue for Democrats
+            "IND": "#7f8c8d"   # Gray for Independents / Others
+        }
+
+        color_a = color_map.get(str(rows[0].get("party")).upper(), "#1a5276")
+        color_b = color_map.get(str(rows[1].get("party")).upper() if len(rows) > 1 else "IND", "#a93226")
+
+        colors = [color_a, color_b, "#7f8c8d"]
         xerr = [moe, moe, 0.0]
 
         y_pos = [2, 1, 0]
